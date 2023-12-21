@@ -59,14 +59,14 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     matrix (0.4.2)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.5)
     minitest (5.20.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     mutex_m (0.2.0)
     nio4r (2.7.0)
-    nokogiri (1.15.5-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.15.5-x86_64-linux)
+    nokogiri (1.15.5)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     pg (1.5.4)
     psych (5.1.1.1)
@@ -119,6 +119,11 @@ GEM
     sinatra-activerecord (2.0.27)
       activerecord (>= 4.1)
       sinatra (>= 1.0)
+    sorbet (0.5.11162)
+      sorbet-static (= 0.5.11162)
+    sorbet-runtime (0.5.11162)
+    sorbet-static (0.5.11162-universal-darwin)
+    sorbet-static (0.5.11162-x86_64-linux)
     stringio (3.1.0)
     tilt (2.3.0)
     timeout (0.4.1)
@@ -145,6 +150,8 @@ DEPENDENCIES
   selenium-webdriver
   sinatra
   sinatra-activerecord
+  sorbet
+  sorbet-runtime
 
 BUNDLED WITH
    2.4.10
