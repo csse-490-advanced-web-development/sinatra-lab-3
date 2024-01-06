@@ -22,7 +22,7 @@ Prepare the database:
 ```
 $ cp config/database.yml.example config/database.yml
 # Update config/database.yml with any username or password information required for your local postgres server
-$ rake db:create:all
+$ rake db:create
 $ rake db:migrate
 $ rake db:environment:set
 $ rake db:test:prepare
