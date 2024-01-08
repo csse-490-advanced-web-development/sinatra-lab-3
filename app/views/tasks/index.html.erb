@@ -5,11 +5,11 @@
   Uncomment the code below by removing the `#` characters from the ERB
 -->
 <ul id="todos">
-  <%# tasks.each do |task| %>
+  <% tasks.each do |task| %>
     <li class="task">
-      <%#= task.description %>
+      <%= task.description %>
     </li>
-  <%# end %>
+  <% end %>
 </ul>
 <!--
   Step 8:
@@ -19,9 +19,12 @@
 -->
 
 <!-- Step 11: Remove this text -->
-<p>This page will soon be home to a TODO app!</p>
+
 
 <!-- Step 13: Add the message about no tasks remaining -->
+<% if tasks.count == 0%>
+  <p>There are no tasks remaining! You should add one!</p>
+<% end %>
 <!-- Step 14: Be sure to run the tests again -->
 <!-- Step 15: Make this text show up conditionally, only when there are no TODOs:
   Hint 1: See https://www.puppet.com/docs/puppet/5.5/lang_template_erb.html#non-printing-tags for an
@@ -33,4 +36,4 @@
 
 
 <!-- Step 18: Create a link to the `/tasks/new`  using the text you see in the test output! -->
-<a href="">...</a>
+<a href="/tasks/new">Add task</a>
