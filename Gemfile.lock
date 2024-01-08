@@ -119,11 +119,6 @@ GEM
     sinatra-activerecord (2.0.27)
       activerecord (>= 4.1)
       sinatra (>= 1.0)
-    sorbet (0.5.11162)
-      sorbet-static (= 0.5.11162)
-    sorbet-runtime (0.5.11162)
-    sorbet-static (0.5.11162-universal-darwin)
-    sorbet-static (0.5.11162-x86_64-linux)
     stringio (3.1.0)
     tilt (2.3.0)
     timeout (0.4.1)
@@ -150,8 +145,6 @@ DEPENDENCIES
   selenium-webdriver
   sinatra
   sinatra-activerecord
-  sorbet
-  sorbet-runtime
 
 BUNDLED WITH
    2.4.10
