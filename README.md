@@ -42,6 +42,8 @@ $ rake db:test:prepare
 $ rerun rackup
 ```
 
+"bundle exec rerun 'rackup'" 
+
 * `rerun` watches for filesystem changes and restarts your app as needed
 * `rackup` runs rack applications (Sinatra is a rack application)
 

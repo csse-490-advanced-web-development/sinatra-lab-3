@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 feature "Managing Tasks", js: true do
-  scenario "viewing the homepage with todo items", skip: "Step 2 - Unskip this test" do
+  scenario "viewing the homepage with todo items" do
     expect(Task.all).to be_empty # Sanity check that the test database is empty
     # Step 3 - Let the error "undefined method `all' for Task:Class"
     #          drive you to the model layer tests to begin implementing the Task model
