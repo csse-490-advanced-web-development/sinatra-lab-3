@@ -43,6 +43,8 @@ Create the local development databases and load them with the correct schema.
 $ rerun rackup
 ```
 
+"bundle exec rerun 'rackup'" 
+
 * `rerun` watches for filesystem changes and restarts your app as needed
 * `rackup` runs rack applications (Sinatra is a rack application)
 
