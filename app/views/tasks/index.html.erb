@@ -22,6 +22,7 @@ If you can dream it, you can TODO it!
 
 <!-- Step 11: Remove this text -->
 <!-- Step 13: Add the message about no tasks remaining -->
+<% if tasks.empty? %> <h2>There are no tasks remaining! You should add one!</h2> <% end %>
 <!-- Step 14: Be sure to run the tests again -->
 <!-- Step 15: Make this text show up conditionally, only when there are no TODOs:
   Hint 1: See https://www.puppet.com/docs/puppet/5.5/lang_template_erb.html#non-printing-tags for an
@@ -33,4 +34,4 @@ If you can dream it, you can TODO it!
 
 
 <!-- Step 18: Create a link to the `/tasks/new`  using the text you see in the test output! -->
-<a href="">...</a>
+<a href="/tasks/new">Add task</a>
