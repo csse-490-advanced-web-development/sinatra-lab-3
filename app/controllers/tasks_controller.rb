@@ -15,6 +15,9 @@ class TasksController < ApplicationController
   #   (see "Routes" in https://sinatrarb.com/intro.html if you need a hint,
   #   or just mimic what we have above for `/tasks`)
   #
+  get '/tasks/new' do
+    erb :"tasks/new.html"
+  end
   # Step 21: Let the tests prompt you to, add a line to render the erb file
   #   "tasks/new.html" (as before, you can refer to the code we have for `/tasks`)
   #
@@ -31,6 +34,9 @@ class TasksController < ApplicationController
   #          For today, we will not be worrying about form validations,
   #          but we will be adding tests for those!
   post '/tasks' do
+    task = Task.new(description: params[:description])
+    task.save!
+    redirect "/"
     # Step 27: After the tests reveal that you still haven't saved the task,
     #          uncomment these lines to actually save the data!
     #
