@@ -69,4 +69,14 @@ class TasksController < ApplicationController
   #   * You will also have to add to this controller so that you can accept PUT requests to e.g. `/tasks/4` (to save updates to the tasks)
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
+  get '/tasks/:id' do
+    task = Task.find(params[:id])
+    erb :"tasks/singleview.html", locals: { task: task }
+  end
+
+  put '/tasks/:id' do
+    task = Task.find(params[:id])
+    task.update(description: params[:description])
+    redirect "/"
+  end
 end
