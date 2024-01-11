@@ -20,6 +20,9 @@ class TasksController < ApplicationController
   #
   #   P.S. Normally, you would have to create the erb view file yourself, but I have
   #   included it in this commit to save you some frustration
+  get '/tasks/new' do
+    erb :"tasks/new.html"
+  end
 
 
 
@@ -36,10 +39,10 @@ class TasksController < ApplicationController
     #
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
-    # task = Task.new(description: params[:description])
-    # task.save!
+    task = Task.new(description: params[:description])
+    task.save!
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
-    # redirect "/"
+    redirect "/"
   end
 end

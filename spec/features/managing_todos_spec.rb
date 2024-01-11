@@ -25,13 +25,13 @@ feature "Managing Tasks", js: true do
     page.should_not have_content "There are no tasks remaining! You should add one!"
   end
 
-  scenario "viewing the homepage without todo items", skip: "Step 12: Unskip this test" do
+  scenario "viewing the homepage without todo items" do
     visit "/"
     page.should_not have_content "This page will soon be home to a TODO app!"
     page.should have_content "There are no tasks remaining! You should add one!"
   end
 
-  scenario "creating a new todo item", skip: "Step 16: Unskip this test" do
+  scenario "creating a new todo item" do
     # Note that this test doesn't stipulate that we have to do this old-school form submission.
     # We could easily upgrade this to be a SPA without this test having to change at all!
     # We happen to be implementing it as a separate page but it could just as easily be on
@@ -55,7 +55,7 @@ feature "Managing Tasks", js: true do
     #
     #          When you see the contents of "app/views/tasks/new.html.erb" being rendered, that should prompt
     #          you to actually create the form (Step 22)
-    fill_in "Task Description", with: "Follow the test instructions"
+    fill_in "description", with: "Follow the test instructions"
     click_button "Save"
     # Step 24: Let the failures that you receive when saving drive you to submit the form to a reasonable URL
     #          (Step 25) and to create the matching Sinatra route (Step 26-27)
