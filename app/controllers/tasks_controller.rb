@@ -83,4 +83,10 @@ class TasksController < ApplicationController
       erb :"tasks/singleview.html", locals: { task: task }
     end
   end
+
+  delete '/tasks/:id' do
+    task = Task.find(params[:id])
+    task.destroy!
+    redirect "/"
+  end
 end
