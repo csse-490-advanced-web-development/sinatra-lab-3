@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 feature "Managing Tasks", js: true do
-  scenario "viewing the homepage with todo items", skip: "Step 2 - Unskip this test" do
+  scenario "viewing the homepage with todo items" do #, skip: "Step 2 - Unskip this test" do
     expect(Task.all).to be_empty # Sanity check that the test database is empty
     # Step 3 - Let the error "undefined method `all' for Task:Class"
     #          drive you to the model layer tests to begin implementing the Task model
@@ -25,13 +25,13 @@ feature "Managing Tasks", js: true do
     page.should_not have_content "There are no tasks remaining! You should add one!"
   end
 
-  scenario "viewing the homepage without todo items", skip: "Step 12: Unskip this test" do
+  scenario "viewing the homepage without todo items" do #, skip: "Step 12: Unskip this test" do
     visit "/"
     page.should_not have_content "This page will soon be home to a TODO app!"
     page.should have_content "There are no tasks remaining! You should add one!"
   end
 
-  scenario "creating a new todo item", skip: "Step 16: Unskip this test" do
+  scenario "creating a new todo item" do #, skip: "Step 16: Unskip this test" do
     # Note that this test doesn't stipulate that we have to do this old-school form submission.
     # We could easily upgrade this to be a SPA without this test having to change at all!
     # We happen to be implementing it as a separate page but it could just as easily be on
