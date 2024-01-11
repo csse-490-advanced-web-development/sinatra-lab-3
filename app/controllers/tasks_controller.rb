@@ -76,7 +76,11 @@ class TasksController < ApplicationController
 
   put '/tasks/:id' do
     task = Task.find(params[:id])
-    task.update(description: params[:description])
-    redirect "/"
+    if task.update(description: params[:description])
+      redirect "/"
+    else
+      flash.now[:errors] = task.errors.full_messages
+      erb :"tasks/singleview.html", locals: { task: task }
+    end
   end
 end
