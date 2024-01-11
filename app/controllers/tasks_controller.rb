@@ -38,8 +38,13 @@ class TasksController < ApplicationController
     #
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
-    # task = Task.new(description: params[:description])
-    # task.save!
+    task = Task.new(description: params[:description])
+    saved = task.save
+    if saved then
+      redirect "/"
+    else
+      flash.now[:error] = "Description can't be blank"
+    end
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
     # redirect "/"
