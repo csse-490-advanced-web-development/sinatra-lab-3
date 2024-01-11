@@ -2,12 +2,12 @@ class TasksController < ApplicationController
   get '/tasks' do
     # Step 9a:
     # Look up all the tasks in the database (by uncommenting the following line
-    # tasks = Task.all
+    tasks = Task.all
     # Step 9b:
     # Pass that list of all tasks to the `erb` partial by adding an extra argument to the erb call below:
-    #   locals: { tasks: Task.all }
+      # locals: { tasks: Task.all }
     # to the end of the line below (similar to what we did with our "Hello, World!" Sinatra app
-    erb :"tasks/index.html"
+    erb :"tasks/index.html", locals: { tasks: Task.all }
   end
 
 
@@ -20,7 +20,9 @@ class TasksController < ApplicationController
   #
   #   P.S. Normally, you would have to create the erb view file yourself, but I have
   #   included it in this commit to save you some frustration
-
+  get '/tasks/new' do
+    erb :"tasks/new.html"
+  end
 
 
 
