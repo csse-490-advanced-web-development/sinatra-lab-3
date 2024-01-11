@@ -1,15 +1,17 @@
 <!-- Step 1: Add a heading, per the test failure! -->
 
+<h1>If you can dream it, you can TODO it!</h1>
+
 <!--
   Step 7:
   Uncomment the code below by removing the `#` characters from the ERB
 -->
 <ul id="todos">
-  <%# tasks.each do |task| %>
+  <% tasks.each do |task| %>
     <li class="task">
-      <%#= task.description %>
+      <%= task.description %>
     </li>
-  <%# end %>
+  <% end %>
 </ul>
 <!--
   Step 8:
@@ -19,9 +21,10 @@
 -->
 
 <!-- Step 11: Remove this text -->
-<p>This page will soon be home to a TODO app!</p>
 
 <!-- Step 13: Add the message about no tasks remaining -->
+
+
 <!-- Step 14: Be sure to run the tests again -->
 <!-- Step 15: Make this text show up conditionally, only when there are no TODOs:
   Hint 1: See https://www.puppet.com/docs/puppet/5.5/lang_template_erb.html#non-printing-tags for an
@@ -31,6 +34,10 @@
   guide shows how to "read" data using ActiveRecord: https://guides.rubyonrails.org/active_record_basics.html#read
 -->
 
+<% if tasks.length() == 0 %>
+<p>There are no tasks remaining! You should add one!</p>
+<% end %>
+
 
 <!-- Step 18: Create a link to the `/tasks/new`  using the text you see in the test output! -->
-<a href="">...</a>
+<a href="/tasks/new">Add task</a>
