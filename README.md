@@ -2,7 +2,7 @@
 
 Lab 3: Photo Processing App
 
-##heroku link
+## heroku link
 https://pure-ridge-06528-c177b2e3667c.herokuapp.com/ | https://git.heroku.com/pure-ridge-06528.git
 
 ## Project Setup
