@@ -9,4 +9,10 @@ class Task < ActiveRecord::Base
   # You can read all about it here:
   #
   # https://guides.rubyonrails.org/active_record_basics.html
+
+  # Step 31: Add an ActiveRecord validation to make the test pass.
+  #
+  # Docs: https://guides.rubyonrails.org/active_record_validations.html
+  #
+  validates :description, presence: true
 end
