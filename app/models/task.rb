@@ -9,5 +9,4 @@ class Task < ActiveRecord::Base
   # You can read all about it here:
   #
   # https://guides.rubyonrails.org/active_record_basics.html
-
 end
