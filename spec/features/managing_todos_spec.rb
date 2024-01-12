@@ -36,7 +36,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Follow the test instructions")
   end
 
-  scenario "creating a new todo with invalid data" do #, skip: "Step 28: Unskip this test" do
+  scenario "creating a new todo with invalid data" do
     visit "/"
     click_link "Add task"
     # Note: we are skipping filling in "Task Description"!
@@ -46,14 +46,6 @@ feature "Managing Tasks", js: true do
     #          Our goal in the integration tests is to make sure that if there are validation
     #          errors that the user gets a useful error message and will be able to successfully
     #          correct their mistakes and resubmit the form.
-    #
-    # Step 29: Before implementing UI changes to have/show validation errors,
-    #          you should first go to the model tests and add tests (Step 30) and validation (Step 31).
-    #          Then return here to continue implementation of the UI portion of the validation.
-    #
-    # Step 32: The new error messages in this test (read the stack trace!) will drive you to the
-    #          controller, where you will add some logic to check if the task object is valid before saving it
-    # Step 34: Use the lack of error notice in the UI to motivate you to add a flash message via. the controller
     page.should have_content("Description can't be blank")
     # NOTE: Eventually we will have a test along these lines in order to prove that we
     #       see appropriate errors alongside the field with errors, but we will
@@ -68,7 +60,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Correcting my errors works!")
   end
 
-  scenario "updating a todo item with valid data", skip: "Step 36: Unskip this test" do
+  scenario "updating a todo item with valid data" do
     # We are using a new tool here! Fabricate helps us create valid test data.
     # You can see the definition of this fabricator in ...
     # While the fabricator we defined is very simple now, we will expand it in
@@ -86,7 +78,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Finish Lab 3, finally", "Eat Lunch")
   end
 
-  scenario "updating a todo item with invalid data", skip: "Step 39: Unskip this test" do
+  scenario "updating a todo item with invalid data" do
     Task.create(description: 'Eat Breakfast')
     visit '/'
     expect_task_list_to_be_exactly("Eat Breakfast")
@@ -102,7 +94,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Correcting my errors works!")
   end
 
-  scenario "deleting a todo" do, skip: "Step 40: Unskip this test" do
+  scenario "deleting a todo" do
     Task.create(description: 'Eat Breakfast')
     Task.create(description: 'Join class session')
     Task.create(description: 'Finish Lab 3, finally')

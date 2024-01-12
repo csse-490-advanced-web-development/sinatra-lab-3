@@ -1,0 +1,20 @@
+<h1>Edit the Task</h1>
+<form method="POST" action="/tasks" enctype="multipart/form-data">
+  <input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}">
+  <input type="hidden" name="id" value="<%=id %>"/>
+  <input type="hidden" name="_method" value="put">
+  <div class="task-edit">
+    <label for="description">Task Description</label>
+    <input type="text" name="description" id="description" value="<%=description%>">
+  </div>
+  <div class="task-edit">
+  <input type="submit" value="Save" />
+</div>
+</form>
+<form method="POST" action="/tasks" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="<%=id %>"/>
+  <input type="hidden" name="_method" value="delete">
+  <div class="task-delete">
+  <input type="submit" value="Delete" />
+</div>
+</form>
