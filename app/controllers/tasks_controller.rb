@@ -27,7 +27,7 @@ class TasksController < ApplicationController
   #   included it in this commit to save you some frustration
 
   get '/tasks/new' do
-    erb :"tasks/new.html", locals: { err: "Description can't be blank" }
+    erb :"tasks/new.html", locals: { task: nil, err: "Description can't be blank" }
   end
 
 
@@ -43,6 +43,9 @@ class TasksController < ApplicationController
     #
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
+    puts("NEED TO DELETE")
+    puts(params[:description])
+    puts(params[:task])
     task = Task.new(description: params[:description])
     #task.save!
     # Step 26b: Since your first test failure is "Not Found", you will start by
@@ -81,9 +84,17 @@ class TasksController < ApplicationController
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
 
-  # get '/tasks/:taskId' do
-  #   task = Task.find(params[:taskId])
-  #   erb :"tasks/new.html", locals: { task: task }
-  # end
+  get '/tasks/:taskId' do
+    task = Task.find(params[:taskId])
+    task.destroy!
+    erb :"tasks/new.html", locals: { task: task }
+  end
+
+  put '/tasks/:taskId' do
+    task = Task.find(params[:taskId])
+    task.destroy!
+    task = Task.new(description: params[:description])
+    redirect "/"
+  end
 
 end
