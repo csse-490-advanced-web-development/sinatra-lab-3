@@ -14,8 +14,8 @@ If you can dream it, you can TODO it!
 -->
 <ul id="todos">
   <% tasks.each do |task| %>
-    <li class="task">
-      <%= task.description %>
+    <li class="task"> 
+	<a href="/tasks/<%= task.id %>"><%= task.description %></a>
     </li>
   <% end %>
 </ul>

@@ -39,10 +39,15 @@ class TasksController < ApplicationController
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
     task = Task.new(description: params[:description])
-    task.save!
+    success = task.save
+    if !success
+	flash.now[:errors] = task.errors.full_messages
+	erb :"tasks/new.html"
+    else
+	redirect "/"
+    end
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
-    redirect "/"
     # Step 33: Modify the code above so that it uses an if/else statement to
     #          react to the task being valid/invalid.  You should render the 'new'
     #          form again if the data can't be saved.
@@ -64,5 +69,33 @@ class TasksController < ApplicationController
   #   * You will also have to add to this controller so that you can accept PUT requests to e.g. `/tasks/4` (to save updates to the tasks)
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
+  get '/tasks/:id' do
+    task = Task.find(params[:id])
+    erb :"tasks/edit.html", locals: {task: task}
+  end
+
+  put '/tasks/:id' do
+    task = Task.find(params[:id])
+    task.description = params[:description]
+    success = task.save
+    if (!success)
+	flash.now[:errors] = task.errors.full_messages
+	erb :"tasks/edit.html", locals: {task: task}
+    else
+	redirect "/tasks"
+    end
+  end
+
+  delete '/tasks/:id' do
+    task = Task.find(params[:id])
+    task.destroy!
+    redirect "/"
+  end
 end
+
+
+
+
+
+
 
