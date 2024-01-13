@@ -1,15 +1,19 @@
+
+
 class TasksController < ApplicationController
+
   get '/tasks' do
     # Step 9a:
     # Look up all the tasks in the database (by uncommenting the following line
-    # tasks = Task.all
+     tasks = Task.all
     # Step 9b:
     # Pass that list of all tasks to the `erb` partial by adding an extra argument to the erb call below:
     #   locals: { tasks: Task.all }
     # to the end of the line below (similar to what we did with our "Hello, World!" Sinatra app
-    erb :"tasks/index.html"
+    erb :"tasks/index.html", locals: { tasks: tasks }
   end
 
+  
 
   # Step 20: Create a new Sinatra route for "/tasks/new"
   #   (see "Routes" in https://sinatrarb.com/intro.html if you need a hint,
@@ -21,7 +25,9 @@ class TasksController < ApplicationController
   #   P.S. Normally, you would have to create the erb view file yourself, but I have
   #   included it in this commit to save you some frustration
 
-
+  get '/tasks/new' do
+    erb :"tasks/new.html", locals: { task: nil, err: nil }
+  end
 
 
   # Step 26a: At this point, we need to create the task, and then
@@ -31,16 +37,22 @@ class TasksController < ApplicationController
   #          For today, we will not be worrying about form validations,
   #          but we will be adding tests for those!
   post '/tasks' do
+    # new task
     # Step 27: After the tests reveal that you still haven't saved the task,
     #          uncomment these lines to actually save the data!
     #
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
-    # task = Task.new(description: params[:description])
-    # task.save!
+    task = Task.new(description: params[:description])
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
-    # redirect "/"
+    if task.save 
+      flash[:error] = nil
+      redirect "/"
+    else 
+      flash[:error] = "Description can't be blank"
+      redirect "/tasks/new"
+    end
 
     # Step 33: Modify the code above so that it uses an if/else statement to
     #          react to the task being valid/invalid.  You should render the 'new'
@@ -55,6 +67,7 @@ class TasksController < ApplicationController
     #          where ... is the full error message.  See the code sample here for
     #          an example of getting full error messages:
     #          https://guides.rubyonrails.org/active_record_validations.html#working-with-validation-errors-errors
+    
   end
 
   # Step 38+:
@@ -63,4 +76,30 @@ class TasksController < ApplicationController
   #   * You will also have to add to this controller so that you can accept PUT requests to e.g. `/tasks/4` (to save updates to the tasks)
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
+
+  get '/tasks/:taskId' do
+    # open edit page for a task
+    task = Task.find(params[:taskId])
+    erb :"tasks/new.html", locals: { task: task, err: nil }
+  end
+
+  put '/tasks/:taskId' do
+    # editing an existing task
+    task = Task.find(params[:taskId])
+    task2 = Task.new(description: params[:description])
+    if task2.save 
+      task.destroy!
+      redirect "/"
+    else 
+      erb :"tasks/new.html", locals: { task: task, err: "Description can't be blank" }
+    end
+  end
+  
+  post '/tasks/delete/:taskId' do
+    # delete a task
+    task = Task.find(params[:taskId])
+    task.destroy!
+    redirect "/"
+  end
+
 end

@@ -1,0 +1,9 @@
+% if task %>
+   <!-- If we are editing an existing task -->
+   <form method="POST" action="/tasks/edit/<%= task.id %>" enctype="multipart/form-data">
+<input type="hidden" name="_method" value="put">
+   <div>EDITING TASK</div>
+ <% else %>
+   <!-- If we are creating a new task -->
+  <form method="POST" action="/tasks" enctype="multipart/form-data">
+ <% end %>
