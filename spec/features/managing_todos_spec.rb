@@ -55,7 +55,7 @@ feature "Managing Tasks", js: true do
     #
     #          When you see the contents of "app/views/tasks/new.html.erb" being rendered, that should prompt
     #          you to actually create the form (Step 22)
-    fill_in "description", with: "Follow the test instructions"
+    fill_in "Task Description", with: "Follow the test instructions"
     click_button "Save"
     # Step 24: Let the failures that you receive when saving drive you to submit the form to a reasonable URL
     #          (Step 25) and to create the matching Sinatra route (Step 26-27)
@@ -128,7 +128,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Correcting my errors works!")
   end
 
-  scenario "deleting a todo" do, skip: "Step 40: Unskip this test" do
+  scenario "deleting a todo", skip: "Step 40: Unskip this test" do
     Task.create(description: 'Eat Breakfast')
     Task.create(description: 'Join class session')
     Task.create(description: 'Finish Lab 3, finally')
