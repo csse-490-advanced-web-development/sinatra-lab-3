@@ -10,7 +10,6 @@ class TasksController < ApplicationController
     # Pass that list of all tasks to the `erb` partial by adding an extra argument to the erb call below:
     #   locals: { tasks: Task.all }
     # to the end of the line below (similar to what we did with our "Hello, World!" Sinatra app
-    # erb :"tasks/index.html"
     erb :"tasks/index.html", locals: { tasks: tasks }
   end
 
@@ -27,7 +26,7 @@ class TasksController < ApplicationController
   #   included it in this commit to save you some frustration
 
   get '/tasks/new' do
-    erb :"tasks/new.html", locals: { task: nil, err: "Description can't be blank" }
+    erb :"tasks/new.html", locals: { task: nil, err: nil }
   end
 
 
@@ -38,27 +37,21 @@ class TasksController < ApplicationController
   #          For today, we will not be worrying about form validations,
   #          but we will be adding tests for those!
   post '/tasks' do
+    # new task
     # Step 27: After the tests reveal that you still haven't saved the task,
     #          uncomment these lines to actually save the data!
     #
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
-    puts("NEED TO DELETE")
-    puts(params[:description])
-    puts(params[:task])
     task = Task.new(description: params[:description])
-    #task.save!
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
-    # redirect "/"
     if task.save 
       flash[:error] = nil
       redirect "/"
-
     else 
       flash[:error] = "Description can't be blank"
       redirect "/tasks/new"
-    
     end
 
     # Step 33: Modify the code above so that it uses an if/else statement to
@@ -85,17 +78,27 @@ class TasksController < ApplicationController
   #   * To delete a task: `task.destroy!`
 
   get '/tasks/:taskId' do
+    # open edit page for a task
     task = Task.find(params[:taskId])
-    task.destroy!
-    erb :"tasks/new.html", locals: { task: task }
+    erb :"tasks/new.html", locals: { task: task, err: nil }
   end
 
   put '/tasks/:taskId' do
+    # editing an existing task
     task = Task.find(params[:taskId])
-    # task.destroy!
-    # task = Task.new(description: params[:description])
-    task.description = params[:description]
-    task.save!
+    task2 = Task.new(description: params[:description])
+    if task2.save 
+      task.destroy!
+      redirect "/"
+    else 
+      erb :"tasks/new.html", locals: { task: task, err: "Description can't be blank" }
+    end
+  end
+  
+  post '/tasks/delete/:taskId' do
+    # delete a task
+    task = Task.find(params[:taskId])
+    task.destroy!
     redirect "/"
   end
 
