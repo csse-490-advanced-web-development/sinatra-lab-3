@@ -63,7 +63,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Follow the test instructions")
   end
 
-  scenario "creating a new todo with invalid data" do #, skip: "Step 28: Unskip this test" do
+  scenario "creating a new todo with invalid data" do
     visit "/"
     click_link "Add task"
     # Note: we are skipping filling in "Task Description"!
@@ -95,7 +95,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Correcting my errors works!")
   end
 
-  scenario "updating a todo item with valid data", skip: "Step 36: Unskip this test" do
+  scenario "updating a todo item with valid data" "Step 36: Unskip this test" do
     # We are using a new tool here! Fabricate helps us create valid test data.
     # You can see the definition of this fabricator in ...
     # While the fabricator we defined is very simple now, we will expand it in
@@ -129,7 +129,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Correcting my errors works!")
   end
 
-  scenario "deleting a todo" do, skip: "Step 40: Unskip this test" do
+  scenario "deleting a todo", skip: "Step 40: Unskip this test" do
     Task.create(description: 'Eat Breakfast')
     Task.create(description: 'Join class session')
     Task.create(description: 'Finish Lab 3, finally')
