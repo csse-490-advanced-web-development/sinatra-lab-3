@@ -40,7 +40,12 @@ class TasksController < ApplicationController
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
     task = Task.new(description: params[:description])
-    task.save!
+    if params[:description].blank?
+      redirect "/tasks/new"
+    end
+    if !task.save
+      redirect "/tasks/new"
+    end
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
     redirect "/"
@@ -69,4 +74,21 @@ class TasksController < ApplicationController
   #   * You will also have to add to this controller so that you can accept PUT requests to e.g. `/tasks/4` (to save updates to the tasks)
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
+  get '/tasks/:id' do
+    task = Task.find_by(id: params['id']) 
+    erb :"tasks/edit.html", :locals => {task: task}
+  end
+  delete '/tasks/:id' do
+    task = Task.find_by(id: params['id'])
+    task.destroy
+    redirect "/"
+  end
+  put '/tasks/:id' do
+    task = Task.find_by(id: params['id'])
+    if params[:description].blank?
+      redirect "/tasks/#{params['id']}"
+    end
+    task.update(description: params[:description])
+    redirect "/"
+  end
 end
