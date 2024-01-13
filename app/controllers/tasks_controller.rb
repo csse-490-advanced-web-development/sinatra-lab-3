@@ -92,8 +92,10 @@ class TasksController < ApplicationController
 
   put '/tasks/:taskId' do
     task = Task.find(params[:taskId])
-    task.destroy!
-    task = Task.new(description: params[:description])
+    # task.destroy!
+    # task = Task.new(description: params[:description])
+    task.description = params[:description]
+    task.save!
     redirect "/"
   end
 
