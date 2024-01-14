@@ -42,7 +42,7 @@ end
 Capybara.app = app
 # NOTE: Change the javascript_driver to :selenium_chrome_headless
 # once you've gotten over the novelty of seeing your tests run live!
-Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.javascript_driver = :selenium_headless
 Capybara.save_path = '../tmp'
 Capybara.server = :puma, { Silent: true }
 
@@ -51,7 +51,7 @@ RSpec.configure do |config|
 end
 
 def expect_task_list_to_be_exactly(*expected_todos)
-  page.should have_content("If you can dream it, you can TODO it!")
+  page.should have_content("Together, we can TODO it!")
   page.should have_css("ul#todos")
   todo_lis = page.find_all("ul#todos li")
   todos_text = todo_lis.map{|todo_li| todo_li.text}

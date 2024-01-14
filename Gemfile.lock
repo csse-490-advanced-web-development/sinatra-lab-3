@@ -46,6 +46,7 @@ GEM
     drb (2.2.0)
       ruby2_keywords
     ffi (1.16.3)
+    ffi (1.16.3-x64-mingw-ucrt)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -66,9 +67,12 @@ GEM
     nio4r (2.7.0)
     nokogiri (1.15.5-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.15.5-x64-mingw-ucrt)
+      racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     pg (1.5.4)
+    pg (1.5.4-x64-mingw-ucrt)
     psych (5.1.1.1)
       stringio
     public_suffix (5.0.4)
@@ -119,6 +123,8 @@ GEM
     sinatra-activerecord (2.0.27)
       activerecord (>= 4.1)
       sinatra (>= 1.0)
+    sinatra-flash (0.3.0)
+      sinatra (>= 1.0.0)
     stringio (3.1.0)
     tilt (2.3.0)
     timeout (0.4.1)
@@ -130,6 +136,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-23
+  x64-mingw-ucrt
   x86_64-linux
 
 DEPENDENCIES
@@ -145,6 +152,7 @@ DEPENDENCIES
   selenium-webdriver
   sinatra
   sinatra-activerecord
+  sinatra-flash
 
 BUNDLED WITH
    2.4.10
