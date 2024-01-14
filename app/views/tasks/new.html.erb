@@ -14,3 +14,8 @@
   <button type="submit">Save</button>
   <!-- Step 23: Create a submit button, per the next test failure -->
 </form>
+<% if flash[:errors] %>
+  <div id="error_explanation">
+    <p><%= flash[:errors] %></p>
+  </div>
+<% end %>
