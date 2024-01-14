@@ -1,0 +1,12 @@
+<h1>Add a New Task</h1>
+<form method="POST" action="/tasks" enctype="multipart/form-data">
+  <!-- <input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}"> -->
+  <div class="edit-task-form">
+    <label for="description">Task Description: </label>
+    <input type="text" name="description" id="description" placeholder="<%= @description %>" required />
+  </div>
+
+  <div class="edit-task-form">
+    <input type="submit" value="Save" />
+  </div>
+</form>

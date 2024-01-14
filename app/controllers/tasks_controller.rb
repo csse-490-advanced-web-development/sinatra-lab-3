@@ -43,7 +43,7 @@ class TasksController < ApplicationController
     if saved then
       redirect "/"
     else
-      flash.now[:error] = "Description can't be blank"
+      flash.now[:errors] = "Description can't be blank"
     end
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
@@ -70,4 +70,21 @@ class TasksController < ApplicationController
   #   * You will also have to add to this controller so that you can accept PUT requests to e.g. `/tasks/4` (to save updates to the tasks)
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
+
+  get 'tasks/:id' do
+    task = Task.find(params[:id]) 
+    @description = task.description
+    erb :"tasks/edit.html"
+  end
+
+  put '/tasks/:id' do
+    task = Task.find(params[:id])
+    task.description = params[:description]
+    saved = task.save
+    if saved then
+      redirect "/"
+    else
+      flash.now[:errors] = "Description can't be blank"
+    end
+  end
 end
