@@ -1,6 +1,18 @@
 <h1>Add a New Task</h1>
 <!-- Step 25: Set the action URL to something appropriate!  In this case, that would be "/tasks" -->
+
+<% if flash[:error] %>
+  <p> <%= flash[:error] %> </p>
+<% end %>
+
+<% if task %> 
+<form method="POST" action="/tasks/<%= task.id %>" enctype="multipart/form-data">
+<input type="hidden" name="_method" value="put">
+<% else %>
 <form method="POST" action="/tasks" enctype="multipart/form-data">
+<% end %>
+
+
   <!-- <input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}"> -->
   <!--
     Step 22: Create an HTML input with a matching label, per the test failure.
@@ -12,9 +24,15 @@
   <!-- Step 23: Create a submit button, per the next test failure -->
   <div >
     <label for="description">Task Description</label>
-    <input type="text" id="description" name="description" />
+    <input type="text" id="description" name="description" value="<%= task&.description || "" %>" />
   </div>
   <div>
     <input type="submit" value="Save" />
   </div>
 </form>
+
+<% if task %>
+  <form method="POST" action="/tasks/delete/<%= task.id %>">
+    <input type="submit" value="Delete" />
+  </form>
+<% end %>

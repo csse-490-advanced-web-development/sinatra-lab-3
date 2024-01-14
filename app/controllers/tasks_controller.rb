@@ -1,4 +1,10 @@
+require 'sinatra'
+require 'sinatra/flash'
+
 class TasksController < ApplicationController
+  enable :sessions
+  register Sinatra::Flash
+
   get '/tasks' do
     # Step 9a:
     tasks = Task.all
@@ -20,10 +26,8 @@ class TasksController < ApplicationController
   #   P.S. Normally, you would have to create the erb view file yourself, but I have
   #   included it in this commit to save you some frustration
   get '/tasks/new' do
-    erb :"tasks/new.html"
+    erb :"tasks/new.html", locals: {task: nil}
   end
-
-
 
 
   # Step 26a: At this point, we need to create the task, and then
@@ -39,10 +43,10 @@ class TasksController < ApplicationController
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
     task = Task.new(description: params[:description])
-    task.save!
+    # task.save!
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
-     redirect "/"
+    #  redirect "/"
 
     # Step 33: Modify the code above so that it uses an if/else statement to
     #          react to the task being valid/invalid.  You should render the 'new'
@@ -57,6 +61,14 @@ class TasksController < ApplicationController
     #          where ... is the full error message.  See the code sample here for
     #          an example of getting full error messages:
     #          https://guides.rubyonrails.org/active_record_validations.html#working-with-validation-errors-errors
+    if task.save
+      redirect "/"
+    else
+      # puts("check if invalid")
+      flash[:error] = "Description can't be blank"
+      redirect "/tasks/new"
+    end
+
   end
 
   # Step 38+:
@@ -65,4 +77,35 @@ class TasksController < ApplicationController
   #   * You will also have to add to this controller so that you can accept PUT requests to e.g. `/tasks/4` (to save updates to the tasks)
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
+  get '/tasks/:id' do
+    # find task w/ id
+    task = Task.find(params[:id])
+    # puts(task.description)
+    # show edit form
+    erb :"tasks/new.html", locals: {task: task}
+  end
+
+  put '/tasks/:id' do
+    task = Task.find(params[:id])
+    task2 = Task.new(description: params[:description])
+  
+    if task2.save
+      # go back after saving
+      task.destroy!
+      redirect "/"
+    else
+      # try again if edit fails
+       flash[:error] = "Description can't be blank"
+      redirect "/tasks/#{params[:id]}"
+    end
+  end
+
+
+  post '/tasks/delete/:id' do
+    task = Task.find(params[:id])
+  
+    # delete
+    task.destroy!
+    redirect "/"
+  end
 end
