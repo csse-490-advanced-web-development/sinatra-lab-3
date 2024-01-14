@@ -94,7 +94,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Correcting my errors works!")
   end
 
-  scenario "updating a todo item with valid data", skip: "Step 36: Unskip this test" do
+  scenario "updating a todo item with valid data" do
     # We are using a new tool here! Fabricate helps us create valid test data.
     # You can see the definition of this fabricator in ...
     # While the fabricator we defined is very simple now, we will expand it in
