@@ -1,0 +1,16 @@
+<h1>Edit Task</h1>
+<form method="POST" action="/tasks/<%=task.id %>" enctype="multipart/form-data">
+  <input type="hidden" name="_method" value="put">
+  <label for="task_description">Task Description</label>
+  <input type="text" id="task_description" name="description", value="<%= task.description %>">
+  <button type="submit">Save</button>
+</form>
+<% if flash[:errors] %>
+  <div id="error_explanation">
+    <p><%= flash[:errors] %></p>
+  </div>
+<% end %>
+<form method="POST" action="/tasks/<%= task.id %>" style="margin-top: 20px;">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete Task</button>
+</form>

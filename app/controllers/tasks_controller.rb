@@ -1,13 +1,14 @@
 class TasksController < ApplicationController
+  register Sinatra::Flash
   get '/tasks' do
     # Step 9a:
     # Look up all the tasks in the database (by uncommenting the following line
-    # tasks = Task.all
+    tasks = Task.all
     # Step 9b:
     # Pass that list of all tasks to the `erb` partial by adding an extra argument to the erb call below:
     #   locals: { tasks: Task.all }
     # to the end of the line below (similar to what we did with our "Hello, World!" Sinatra app
-    erb :"tasks/index.html"
+    erb :"tasks/index.html", locals: { tasks: tasks }
   end
 
 
@@ -15,6 +16,9 @@ class TasksController < ApplicationController
   #   (see "Routes" in https://sinatrarb.com/intro.html if you need a hint,
   #   or just mimic what we have above for `/tasks`)
   #
+  get '/tasks/new' do
+    erb :"tasks/new.html"
+  end
   # Step 21: Let the tests prompt you to, add a line to render the erb file
   #   "tasks/new.html" (as before, you can refer to the code we have for `/tasks`)
   #
@@ -31,6 +35,7 @@ class TasksController < ApplicationController
   #          For today, we will not be worrying about form validations,
   #          but we will be adding tests for those!
   post '/tasks' do
+    task = Task.new(description: params[:description])
     # Step 27: After the tests reveal that you still haven't saved the task,
     #          uncomment these lines to actually save the data!
     #
@@ -50,6 +55,12 @@ class TasksController < ApplicationController
     #                 Switching to `task.save` returns a boolean that you can
     #                 use in the if/else statement
     #
+    if task.save
+      redirect "/"
+    else
+      flash.now[:errors] = "Description can't be blank"
+      erb :"tasks/new.html", locals: { task: task }
+    end
     # Step 35: We will use `sinatra-flash` (https://github.com/SFEley/sinatra-flash)
     #          to add a message to our output. e.g. `flash.now[:errors] = ...`
     #          where ... is the full error message.  See the code sample here for
@@ -63,4 +74,24 @@ class TasksController < ApplicationController
   #   * You will also have to add to this controller so that you can accept PUT requests to e.g. `/tasks/4` (to save updates to the tasks)
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
+  get '/tasks/:id/edit' do
+    task = Task.find(params[:id])
+    erb :'tasks/edit.html', locals: { task: task }
+  end
+
+  put '/tasks/:id' do
+    task = Task.find(params[:id])
+    if task.update(description: params[:description])
+      redirect '/'
+    else
+      flash.now[:error] = "Description can't be blank"
+      erb :'tasks/edit.html', locals: { task: task }
+    end
+  end
+
+  delete '/tasks/:id' do
+    task = Task.find(params[:id])
+    task.destroy
+    redirect '/'
+  end
 end
