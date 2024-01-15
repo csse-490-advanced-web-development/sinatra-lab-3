@@ -20,12 +20,7 @@ class TasksController < ApplicationController
     end
   end
 
-  # Step 38+:
-  #   * You're going to have to add to this controller so that you can accept GET requests to e.g. `/tasks/4` (to render the edit form)
-  #   * You will use route params (see: https://sinatrarb.com/intro.html#routes) for this.
-  #   * You will also have to add to this controller so that you can accept PUT requests to e.g. `/tasks/4` (to save updates to the tasks)
-  #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
-  #   * To delete a task: `task.destroy!`
+
 
   get '/tasks/:id' do
     task = Task.find_by(id: params['id'])
