@@ -20,7 +20,7 @@ describe "Task" do
       end
     end
 
-    describe "without a description", skip: "Step 30: Unskip this test and the one below" do
+    describe "without a description" do
       let(:task){ Task.new }
       before { task.save }
 
@@ -28,7 +28,7 @@ describe "Task" do
       it { task.errors[:description].should include "can't be blank" }
     end
 
-    describe "with a blank description", skip: "Step 30: Unskip this test and the one above" do
+    describe "with a blank description" do
       let(:task){ Task.new(description: "    ") }
       before { task.save }
 

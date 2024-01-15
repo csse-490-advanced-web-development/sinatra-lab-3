@@ -15,7 +15,7 @@
 <ul id="todos">
   <% tasks.each do |task| %>
     <li class="task">
-      <%= task.description %>
+      <a href="task/<%= task.id %>"><%= task.description %></a>
     </li>
   <% end %>
 </ul>

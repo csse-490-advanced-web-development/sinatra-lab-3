@@ -1,3 +1,6 @@
+require 'sinatra/base'
+require 'sinatra/flash'
+
 class TasksController < ApplicationController
   get '/tasks' do
     # Step 9a:
@@ -40,10 +43,14 @@ class TasksController < ApplicationController
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
     task = Task.new(description: params[:description])
-    task.save!
+    if task.save
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
-    redirect "/"
+      redirect "/"
+    else
+      flash.now[:error] = "Description can't be blank"
+      # erb :"tasks/new.html"------------this makes the rake test go crazy but it does its job on localhost:9292
+    end    
 
     # Step 33: Modify the code above so that it uses an if/else statement to
     #          react to the task being valid/invalid.  You should render the 'new'
@@ -60,10 +67,24 @@ class TasksController < ApplicationController
     #          https://guides.rubyonrails.org/active_record_validations.html#working-with-validation-errors-errors
   end
 
+
   # Step 38+:
   #   * You're going to have to add to this controller so that you can accept GET requests to e.g. `/tasks/4` (to render the edit form)
   #   * You will use route params (see: https://sinatrarb.com/intro.html#routes) for this.
   #   * You will also have to add to this controller so that you can accept PUT requests to e.g. `/tasks/4` (to save updates to the tasks)
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
+
+  get '/tasks/:id' do
+    erb :"tasks/update.html", locals: {tasks: Task.all , id: params['id']}
+  end
+
+
+
+  delete '/tasks' do
+    task = Task.find_by(id: params['id'])
+    task.destroy!
+    redirect "/"
+  end
+
 end
