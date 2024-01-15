@@ -1,6 +1,3 @@
-require 'sinatra/base'
-require 'sinatra/flash'
-
 class TasksController < ApplicationController
   get '/tasks' do
     # Step 9a:
@@ -49,7 +46,7 @@ class TasksController < ApplicationController
       redirect "/"
     else
       flash.now[:error] = "Description can't be blank"
-      # erb :"tasks/new.html"------------this makes the rake test go crazy but it does its job on localhost:9292
+      erb :"tasks/new.html"
     end    
 
     # Step 33: Modify the code above so that it uses an if/else statement to
@@ -76,9 +73,23 @@ class TasksController < ApplicationController
   #   * To delete a task: `task.destroy!`
 
   get '/tasks/:id' do
-    erb :"tasks/update.html", locals: {tasks: Task.all , id: params['id']}
+    @task = Task.find(params[:id])
+    puts "DEBUG: #{task.inspect}" # Add this line for debugging
+    erb :"tasks/update.html", locals: { task: @task }
   end
 
+
+  
+  put '/tasks/:id' do
+    @task = Task.find(params[:id])
+    if task.update(description: params[:description])
+      redirect "/"
+    else
+      flash.now[:error] = "Description can't be blank"
+      erb :"tasks/update.html", locals: { task: @task }
+      
+    end
+  end
 
 
   delete '/tasks' do

@@ -1,22 +1,16 @@
 <h1>Edit an Existing Task</h1>
 
-<form method="POST" action="/tasks" enctype="multipart/form-data">
-  <!-- <input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}"> -->
-  <!--
-    Step 22: Create an HTML input with a matching label, per the test failure.
-             The name of the field should be "description".
-
-    Hint: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form has a nice
-    example of a simple HTML form!
-  -->
-  <form action="" method="get" class="form-example">
+<form method="POST" action="/tasks/<%= task.id %>/update" enctype="multipart/form-data">
   <div class="form-example">
     <label for="description">Task Description</label>
-    <input type="text" name="description" id="description"/>
+    <input type="text" name="description" id="description" value="<%= task.description %>" />
   </div>
+
   <div class="form-example">
     <input type="submit" value="Save" />
   </div>
-</form>
 
+  <div class="form-example">
+    <input type="submit" value="Delete" />
+  </div>
 </form>
