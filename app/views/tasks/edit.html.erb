@@ -5,3 +5,7 @@
   <input name="description" id="Task Description" value="<%= task.description %>"></input>
   <input type="submit" value="Save"/>
 </form>
+<form method="post" action="/tasks/<%= task.id%>" enctype="multipart/form-data">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete"/>
+</form>

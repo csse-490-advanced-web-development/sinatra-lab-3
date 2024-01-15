@@ -78,7 +78,18 @@ class TasksController < ApplicationController
   put '/tasks/:id' do
     task = Task.find(params['id'])
     task.description = params['description']
-    task.save
+    if task.save
+        redirect "/"
+      else
+        flash.now[:errors] = task.errors.full_messages
+        erb :"tasks/edit.html", locals: {task: task}
+        # redirect "/tasks/#{task.id}"
+      end
+  end
+
+  delete '/tasks/:id' do
+    task = Task.find(params['id'])
+    task.destroy!
     redirect "/"
   end
 
