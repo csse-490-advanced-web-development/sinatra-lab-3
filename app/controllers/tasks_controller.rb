@@ -41,6 +41,7 @@ class TasksController < ApplicationController
     #          Note: ActiveRecord does sanitize the incoming data for us.
     #
     task = Task.new(description: params[:description])
+
     
     # Step 26b: Since your first test failure is "Not Found", you will start by
     #           uncommenting the following line, to redirect back to the homepage:
@@ -51,7 +52,6 @@ class TasksController < ApplicationController
       redirect "/"
     end
 
-    
     # Step 33: Modify the code above so that it uses an if/else statement to
     #          react to the task being valid/invalid.  You should render the 'new'
     #          form again if the data can't be saved.
