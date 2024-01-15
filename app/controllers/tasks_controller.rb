@@ -15,8 +15,8 @@ class TasksController < ApplicationController
     if task.save
       redirect "/"
     else
-      flash[:errors] = "Description can't be blank"
-      redirect "/task/new"
+      flash[:error] = "Description can't be blank"
+      redirect "/tasks/new"
     end
   end
 
