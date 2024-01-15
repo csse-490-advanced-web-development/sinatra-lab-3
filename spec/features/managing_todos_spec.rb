@@ -112,7 +112,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Finish Lab 3, finally", "Eat Lunch")
   end
 
-  scenario "updating a todo item with invalid data", skip: "Step 39: Unskip this test" do
+  scenario "updating a todo item with invalid data" do
     Task.create(description: 'Eat Breakfast')
     visit '/'
     expect_task_list_to_be_exactly("Eat Breakfast")

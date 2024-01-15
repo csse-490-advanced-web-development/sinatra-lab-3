@@ -72,12 +72,14 @@ class TasksController < ApplicationController
   #   * To delete a task: `task.destroy!`
   get '/tasks/:id' do
     task = Task.find(params['id'])
-    @desc = task.description
-    puts @desc
-    erb :"tasks/new.html"
+    erb :"tasks/edit.html", locals: {task: task}
   end
 
   put '/tasks/:id' do
     task = Task.find(params['id'])
+    task.description = params['description']
+    task.save
+    redirect "/"
   end
+
 end
