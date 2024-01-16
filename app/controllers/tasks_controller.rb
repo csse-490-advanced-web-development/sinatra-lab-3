@@ -72,27 +72,26 @@ class TasksController < ApplicationController
   #   * This will give you some good hints on hooking everything together!: https://gist.github.com/victorwhy/45bb5637cd3e7e879ace
   #   * To delete a task: `task.destroy!`
 
-  get '/tasks/:id' do
-    @task = Task.find(params[:id])
-    puts "DEBUG: #{task.inspect}" # Add this line for debugging
-    erb :"tasks/update.html", locals: { task: @task }
+  get '/task/:id' do
+    task = Task.find(params[:id])
+    erb :"tasks/update.html", locals: { task: task }
   end
 
 
   
-  put '/tasks/:id' do
-    @task = Task.find(params[:id])
+  put '/task/:id' do
+    task = Task.find(params[:id])
     if task.update(description: params[:description])
       redirect "/"
     else
       flash.now[:error] = "Description can't be blank"
-      erb :"tasks/update.html", locals: { task: @task }
+      erb :"tasks/update.html", locals: { task: task }
       
     end
   end
 
 
-  delete '/tasks' do
+  delete '/task' do
     task = Task.find_by(id: params['id'])
     task.destroy!
     redirect "/"
