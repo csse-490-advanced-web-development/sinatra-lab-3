@@ -15,3 +15,13 @@ class ApplicationController < Sinatra::Application
     redirect "/tasks"
   end
 end
+
+helpers do
+  def h(text)
+    Rack::Utils.escape_html(text.to_s)
+  end
+
+  def hattr(text)
+    Rack::Utils.escape_path(text.to_s)
+  end
+end
