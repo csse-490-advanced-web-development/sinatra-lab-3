@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 feature "Managing Tasks", js: true do
-  scenario "viewing the homepage with todo items", skip: "Step 2 - Unskip this test" do
+  scenario "viewing the homepage with todo items" do
     expect(Task.all).to be_empty # Sanity check that the test database is empty
     # Step 3 - Let the error "undefined method `all' for Task:Class"
     #          drive you to the model layer tests to begin implementing the Task model
@@ -25,13 +25,13 @@ feature "Managing Tasks", js: true do
     page.should_not have_content "There are no tasks remaining! You should add one!"
   end
 
-  scenario "viewing the homepage without todo items", skip: "Step 12: Unskip this test" do
+  scenario "viewing the homepage without todo items" do
     visit "/"
     page.should_not have_content "This page will soon be home to a TODO app!"
     page.should have_content "There are no tasks remaining! You should add one!"
   end
 
-  scenario "creating a new todo item", skip: "Step 16: Unskip this test" do
+  scenario "creating a new todo item" do
     # Note that this test doesn't stipulate that we have to do this old-school form submission.
     # We could easily upgrade this to be a SPA without this test having to change at all!
     # We happen to be implementing it as a separate page but it could just as easily be on
@@ -62,7 +62,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Follow the test instructions")
   end
 
-  scenario "creating a new todo with invalid data" do #, skip: "Step 28: Unskip this test" do
+  scenario "creating a new todo with invalid data" do
     visit "/"
     click_link "Add task"
     # Note: we are skipping filling in "Task Description"!
@@ -94,7 +94,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Correcting my errors works!")
   end
 
-  scenario "updating a todo item with valid data", skip: "Step 36: Unskip this test" do
+  scenario "updating a todo item with valid data" do
     # We are using a new tool here! Fabricate helps us create valid test data.
     # You can see the definition of this fabricator in ...
     # While the fabricator we defined is very simple now, we will expand it in
@@ -112,7 +112,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Finish Lab 3, finally", "Eat Lunch")
   end
 
-  scenario "updating a todo item with invalid data", skip: "Step 39: Unskip this test" do
+  scenario "updating a todo item with invalid data" do
     Task.create(description: 'Eat Breakfast')
     visit '/'
     expect_task_list_to_be_exactly("Eat Breakfast")
@@ -128,7 +128,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Correcting my errors works!")
   end
 
-  scenario "deleting a todo" do, skip: "Step 40: Unskip this test" do
+  scenario "deleting a todo" do
     Task.create(description: 'Eat Breakfast')
     Task.create(description: 'Join class session')
     Task.create(description: 'Finish Lab 3, finally')

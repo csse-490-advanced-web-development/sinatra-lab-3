@@ -1,0 +1,16 @@
+<h1>Edit an Existing Task</h1>
+
+<form method="POST" action="/task/<%= task.id %>" enctype="multipart/form-data">
+  <div class="form-example">
+    <label for="description">Task Description</label>
+    <input type="text" name="description" id="description" value="<%= task.description %>" />
+  </div>
+
+  <div class="form-example">
+    <input type="submit" value="Save" />
+  </div>
+
+  <div class="form-example">
+    <input type="submit" value="Delete" />
+  </div>
+</form>
