@@ -1,17 +1,17 @@
 require_relative '../spec_helper'
 
 feature "Managing Tasks", js: true do
-  scenario "viewing the homepage with todo items", skip: "Step 2 - Unskip this test" do
+  scenario "viewing the homepage with todo items" do
     expect(Task.all).to be_empty # Sanity check that the test database is empty
-    # Step 3 - Let the error "undefined method `all' for Task:Class"
+    # Step 3 - Let the errr "undefined method `all' for Task:Class"
     #          drive you to the model layer tests to begin implementing the Task model
     #          (look for the text "Step 4" to find your next destination!)
     task1 = Task.create(description: 'Eat breakfast')
     task2 = Task.create(description: 'Join class session')
     task3 = Task.create(description: 'Work on lab')
     visit '/'
-    todo_lis = page.find_all("ul#todos li")
-    todos_text = todo_lis.map{|todo_li| todo_li.text}
+    todo_lis = page.all("ul#todos li")
+    todos_text = todo_lis.map(&:text)
     expected_todos = ["Eat breakfast", "Join class session", "Work on lab"]
     # Step 6 - Return to this test.  You should now have an error along the lines of
     #              expected: ["Eat breakfast", "Join class session", "Work on lab"]
@@ -25,13 +25,13 @@ feature "Managing Tasks", js: true do
     page.should_not have_content "There are no tasks remaining! You should add one!"
   end
 
-  scenario "viewing the homepage without todo items", skip: "Step 12: Unskip this test" do
+  scenario "viewing the homepage without todo items" do
     visit "/"
     page.should_not have_content "This page will soon be home to a TODO app!"
     page.should have_content "There are no tasks remaining! You should add one!"
   end
 
-  scenario "creating a new todo item", skip: "Step 16: Unskip this test" do
+  scenario "creating a new todo item" do
     # Note that this test doesn't stipulate that we have to do this old-school form submission.
     # We could easily upgrade this to be a SPA without this test having to change at all!
     # We happen to be implementing it as a separate page but it could just as easily be on
@@ -62,7 +62,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Follow the test instructions")
   end
 
-  scenario "creating a new todo with invalid data" do #, skip: "Step 28: Unskip this test" do
+  scenario "creating a new todo with invalid data", skip: "Step 36: Unskip this test" do
     visit "/"
     click_link "Add task"
     # Note: we are skipping filling in "Task Description"!
@@ -84,8 +84,8 @@ feature "Managing Tasks", js: true do
     # NOTE: Eventually we will have a test along these lines in order to prove that we
     #       see appropriate errors alongside the field with errors, but we will
     #       wait to do that until we start using form builders to help us!
-    # task_description_field = find_field("Task Description")
-    # task_description_field.attr("validationMessage").should include "Please fill out this field"
+    #task_description_field = find_field("Task Description")
+    #task_description_field.attr("validationMessage").should include "Please fill out this field"
 
     # NOTE: I *always* test that resubmitting the form with corrected data works
     #       because this is a common area for accidental breakage:
@@ -128,7 +128,7 @@ feature "Managing Tasks", js: true do
     expect_task_list_to_be_exactly("Correcting my errors works!")
   end
 
-  scenario "deleting a todo" do, skip: "Step 40: Unskip this test" do
+  scenario "deleting a todo", skip: "Step 40: Unskip this test" do
     Task.create(description: 'Eat Breakfast')
     Task.create(description: 'Join class session')
     Task.create(description: 'Finish Lab 3, finally')

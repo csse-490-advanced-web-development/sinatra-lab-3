@@ -1,4 +1,6 @@
-class Task
+require 'active_record'
+
+class Task < ActiveRecord::Base
   # Step 5: For the initial implementation of this class,
   # update the class declaration to inherit from ActiveRecord::Base.
   #

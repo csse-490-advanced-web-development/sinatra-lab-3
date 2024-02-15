@@ -2,7 +2,7 @@ require_relative "../spec_helper"
 
 describe "Task" do
   describe "#create" do
-    describe "with valid data", skip: "Step 4 - Unskip this test.  Run `rspec spec/models/task_spec.rb` to focus on the task model" do
+    describe "with valid data" do
       before do
         Task.count.should eq 0  # Sanity check that we haven't got orphaned records hanging around
         # Step 5 - Let the error "undefined method `count' for Task:Class"

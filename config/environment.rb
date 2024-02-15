@@ -13,3 +13,9 @@ require './app/controllers/application_controller'
 Dir[SINATRA_ROOT + "/app/**/**.rb"].each do |file|
   require file
 end
+
+class ApplicationController
+  get '/tasks/new' do
+    "Hello World"
+  end
+end

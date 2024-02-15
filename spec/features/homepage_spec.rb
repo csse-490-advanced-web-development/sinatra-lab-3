@@ -1,8 +1,8 @@
 require_relative '../spec_helper'
 
 feature "loading the homepage", js: true do
-  scenario "shows a motivational quote", skip: "Step 0 - Unskip this test, read the test failure and implement this test" do
+  scenario "shows a motivational quote" do
     visit "/"
-    expect(page).to have_css "h1", text: "If you can dream it, you can TODO it!"
+    expect(page).to have_css "h1", text: "Take the risk or lose the chance"
   end
 end
