@@ -1,4 +1,4 @@
-class Task
+class Task < ActiveRecord::Base
   # Step 5: For the initial implementation of this class,
   # update the class declaration to inherit from ActiveRecord::Base.
   #
@@ -10,8 +10,11 @@ class Task
   #
   # https://guides.rubyonrails.org/active_record_basics.html
 
+  validates :description, presence: true
+
   # Step 31: Add an ActiveRecord validation to make the test pass.
   #
   # Docs: https://guides.rubyonrails.org/active_record_validations.html
   #
+
 end
