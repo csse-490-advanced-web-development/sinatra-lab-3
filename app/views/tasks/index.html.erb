@@ -1,42 +1,20 @@
-<!-- Step 1: Add a heading, per the test failure! -->
+<!-- Step 1: Add a heading -->
+<h1>Tasks List</h1>
 
-<!--
-  Step 7:
-  Uncomment the code below by removing the `#` characters from the ERB
--->
-<!--
-  Step 37: Turn your task descriptions into links to the (soon to exist) edit page:
-  <a href="/tasks/12">Eat Breakfast</a>
-           ^ the path above fits in with the REST convention
-           ^ you can get the id of the task with `task.id`
--->
+<!-- Step 18: Create a link to the `/tasks/new` -->
+<a href="/tasks/new">Add a new task</a>
+
 <ul id="todos">
-  <%# tasks.each do |task| %>
+  <!-- Step 7 & 37: Display tasks and make each description a link to the edit page -->
+  <% tasks.each do |task| %>
     <li class="task">
-      <%#= task.description %>
+      <a href="/tasks/<%= task.id %>/edit"><%= task.description %></a>
     </li>
-  <%# end %>
+  <% end %>
 </ul>
-<!--
-  Step 8:
-  Let the error "undefined local variable or method `tasks'"
-  thrown by the code above, drive you to move in to the
-  controller to pass a local `tasks` variable in to this template!
--->
 
-<!-- Step 11: Remove this text -->
-<p>This page will soon be home to a TODO app!</p>
+<!-- Step 13, 14, 15: Conditionally show a message when there are no TODOs -->
+<% if tasks.empty? %>
+  <p>There are no tasks remaining.</p>
+<% end %>
 
-<!-- Step 13: Add the message about no tasks remaining -->
-<!-- Step 14: Be sure to run the tests again -->
-<!-- Step 15: Make this text show up conditionally, only when there are no TODOs:
-  Hint 1: See https://www.puppet.com/docs/puppet/5.5/lang_template_erb.html#non-printing-tags for an
-  example of using an `if` statement in ERB (the default templating language included with ruby)!
-
-  Hint 2: Our `Task` class inherits from ActiveRecord. This section of the Ruby on Rails ActiveRecord
-  guide shows how to "read" data using ActiveRecord: https://guides.rubyonrails.org/active_record_basics.html#read
--->
-
-
-<!-- Step 18: Create a link to the `/tasks/new`  using the text you see in the test output! -->
-<a href="">...</a>
